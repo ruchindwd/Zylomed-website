@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; Set-Location \"c:\\\\Users\\\\bruger\\\\OneDrive\\\\Documents\\\\VisualStudio_Claude_Project1\"; node screenshot-all.mjs)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; Set-Location \"c:\\\\Users\\\\bruger\\\\OneDrive\\\\Documents\\\\VisualStudio_Claude_Project1\"; node screenshot-all.mjs 2>&1 | Select-String \"therapeutic|Done\")",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; Set-Location \"c:\\\\Users\\\\bruger\\\\OneDrive\\\\Documents\\\\VisualStudio_Claude_Project1\"; Start-Process -FilePath \"node\" -ArgumentList \"server.mjs\" -WindowStyle Hidden; Start-Sleep -Seconds 2; Start-Process \"http://localhost:3000\")"
+    ]
+  }
+}

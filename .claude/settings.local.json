@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Start-Process \"c:\\\\Users\\\\bruger\\\\OneDrive\\\\Documents\\\\VisualStudio_Claude_Project1\\\\index.html\")",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; Set-Location \"c:\\\\Users\\\\bruger\\\\OneDrive\\\\Documents\\\\VisualStudio_Claude_Project1\"; node screenshot-section.mjs http://localhost:3000 0 hero)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; Set-Location \"c:\\\\Users\\\\bruger\\\\OneDrive\\\\Documents\\\\VisualStudio_Claude_Project1\"; node probe-offsets.mjs)"
+    ]
+  }
+}
