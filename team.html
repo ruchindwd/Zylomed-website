@@ -25,7 +25,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scroll-padding-top: 76px; }
 
         body {
             font-family: 'Rubik', sans-serif;
@@ -96,6 +96,7 @@
         }
 
         .nav-contact {
+            display: inline-block;
             background: var(--red);
             color: white !important;
             padding: 10px 26px;
@@ -109,6 +110,41 @@
         }
 
         .nav-contact:active { transform: translateY(0); }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--navy);
+            border-radius: 1px;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .nav-toggle:hover span { background: var(--red); }
+
+        .nav-toggle:focus-visible {
+            outline: 2px solid var(--teal);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* ── HERO ─────────────────────────────────────────── */
         .hero {
@@ -134,7 +170,6 @@
             text-transform: uppercase;
             color: var(--teal);
             margin-bottom: 28px;
-            white-space: nowrap;
         }
 
         .eyebrow::before {
@@ -1109,8 +1144,45 @@
         }
 
         @media (max-width: 768px) {
-            .nav { padding: 0 24px; }
-            .nav-links { display: none; }
+            .nav { padding: 0 20px; }
+            .nav-toggle { display: flex; }
+
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                position: fixed;
+                top: 76px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 16px 24px 28px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 20px 40px -12px rgba(17,58,112,0.18), 0 4px 14px rgba(17,58,112,0.08);
+                transform: translateY(-12px);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: transform 0.25s ease, opacity 0.25s ease;
+                z-index: 199;
+            }
+
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+
+            .nav-links a { font-size: 16px; padding: 12px 4px; }
+
+            .nav-links .nav-contact {
+                margin-top: 12px;
+                text-align: center;
+                padding: 11px 22px;
+                font-size: 14px;
+            }
 
             .hero-left { padding: 48px 24px; }
             .hero-left h1 { font-size: 38px; }
@@ -1373,7 +1445,10 @@
         <img src="brand_assets/zylomed-logo-icon.png" alt="Zylomed Healthcare Ltd.">
         <span class="nav-logo-text">ZYLOMED<br>HEALTHCARE</span>
     </a>
-    <ul class="nav-links">
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#products">Products</a></li>
         <li><a href="index.html#therapy">Therapy Areas</a></li>
@@ -1537,6 +1612,29 @@
 </footer>
 
 <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    function closeNav() {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    navToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        navToggle.classList.toggle('active', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
+
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+            closeNav();
+        }
+    });
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {

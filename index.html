@@ -25,7 +25,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scroll-padding-top: 76px; }
 
         body {
             font-family: 'Rubik', sans-serif;
@@ -96,6 +96,7 @@
         }
 
         .nav-contact {
+            display: inline-block;
             background: var(--red);
             color: white !important;
             padding: 10px 26px;
@@ -109,6 +110,41 @@
         }
 
         .nav-contact:active { transform: translateY(0); }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--navy);
+            border-radius: 1px;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .nav-toggle:hover span { background: var(--red); }
+
+        .nav-toggle:focus-visible {
+            outline: 2px solid var(--teal);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; }
+        .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* ── HERO ─────────────────────────────────────────── */
         .hero {
@@ -134,7 +170,6 @@
             text-transform: uppercase;
             color: var(--teal);
             margin-bottom: 28px;
-            white-space: nowrap;
         }
 
         .eyebrow::before {
@@ -483,6 +518,23 @@
             font-size: 13px;
             color: var(--text-light);
             line-height: 1.5;
+        }
+
+        /* ── THERAPY INTRO ────────────────────────────────── */
+        .therapy-intro {
+            background: white;
+            padding: 96px 80px 0;
+        }
+
+        .therapy-intro .section-header h2 { color: var(--navy); }
+
+        .section-header .section-sub {
+            font-size: 15px;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 560px;
+            margin: 12px auto 0;
         }
 
         /* ── EDITORIAL SPOTLIGHTS ────────────────────────── */
@@ -1095,6 +1147,8 @@
             .about-intro { grid-template-columns: 1fr; gap: 40px; padding: 72px 48px; }
             .about-right { padding-top: 0; }
 
+            .therapy-intro { padding: 72px 48px 0; }
+
             .spotlight { grid-template-columns: 1fr; }
             .sp-image { min-height: 420px; }
             .sp-content { padding: 64px 48px; }
@@ -1109,8 +1163,45 @@
         }
 
         @media (max-width: 768px) {
-            .nav { padding: 0 24px; }
-            .nav-links { display: none; }
+            .nav { padding: 0 20px; }
+            .nav-toggle { display: flex; }
+
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                position: fixed;
+                top: 76px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 16px 24px 28px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 20px 40px -12px rgba(17,58,112,0.18), 0 4px 14px rgba(17,58,112,0.08);
+                transform: translateY(-12px);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: transform 0.25s ease, opacity 0.25s ease;
+                z-index: 199;
+            }
+
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+
+            .nav-links a { font-size: 16px; padding: 12px 4px; }
+
+            .nav-links .nav-contact {
+                margin-top: 12px;
+                text-align: center;
+                padding: 11px 22px;
+                font-size: 14px;
+            }
 
             .hero-left { padding: 48px 24px; }
             .hero-left h1 { font-size: 38px; }
@@ -1125,8 +1216,39 @@
             .products-header { padding: 0 24px 40px; flex-direction: column; align-items: flex-start; gap: 16px; }
             .products-scroll-wrap { padding: 0 24px 20px; }
 
-            .sp-content { padding: 48px 24px; }
-            .sp-content h2 { font-size: 28px; }
+            .therapy-intro { padding: 56px 24px 0; }
+            .therapy-intro .section-header { margin-bottom: 40px; }
+
+            .spotlight {
+                grid-template-columns: 1fr 120px;
+                align-items: stretch;
+                gap: 0;
+                min-height: 0;
+                margin: 0 20px 16px;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                overflow: hidden;
+            }
+
+            .spotlight .sp-content {
+                order: 1;
+                padding: 22px 18px;
+            }
+
+            .spotlight .sp-image {
+                order: 2;
+                height: auto;
+                min-height: 0;
+                align-self: stretch;
+            }
+
+            .spotlight .sp-image-overlay { display: none; }
+
+            .sp-eyebrow { font-size: 10px; margin-bottom: 8px; }
+            .sp-content h2 { font-size: 18px; line-height: 1.3; margin-bottom: 8px; }
+            .sp-content p { font-size: 13px; line-height: 1.6; margin-bottom: 10px; }
+            .pill-list { gap: 6px; margin-top: 8px; }
+            .pill { font-size: 10px; padding: 5px 11px; }
 
             .statement { padding: 80px 24px; }
             .statement blockquote { font-size: 32px; }
@@ -1153,7 +1275,10 @@
         <img src="brand_assets/zylomed-logo-icon.png" alt="Zylomed Healthcare Ltd.">
         <span class="nav-logo-text">ZYLOMED<br>HEALTHCARE</span>
     </a>
-    <ul class="nav-links">
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#products">Products</a></li>
         <li><a href="#therapy">Therapy Areas</a></li>
@@ -1419,9 +1544,16 @@
 </section>
 
 <!-- ── THERAPY SPOTLIGHTS ────────────────────────────────── -->
+<section class="therapy-intro" id="therapy">
+    <div class="section-header fade-up">
+        <p class="section-eyebrow">Areas of Expertise</p>
+        <h2>Our Therapy Areas</h2>
+        <p class="section-sub">Six therapy areas, each backed by science and built for accessibility &mdash; from liver care to women's health.</p>
+    </div>
+</section>
 
 <!-- Gastroenterology: image left -->
-<section class="spotlight" id="therapy">
+<section class="spotlight">
     <div class="sp-image">
         <img src="sasun-bughdaryan-_cJT-w00-VE-unsplash.jpg" alt="Gastroenterology">
         <div class="sp-image-overlay"></div>
@@ -1668,6 +1800,29 @@
 </footer>
 
 <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    function closeNav() {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    navToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        navToggle.classList.toggle('active', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
+
+    document.addEventListener('click', (e) => {
+        if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+            closeNav();
+        }
+    });
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
