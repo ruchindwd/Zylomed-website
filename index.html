@@ -869,12 +869,12 @@
 
         /* ── CONTACT ──────────────────────────────────────── */
         .contact {
-            display: grid;
-            grid-template-columns: 44fr 56fr;
+            background: var(--navy-dark);
         }
 
         .contact-left {
-            background: var(--navy-dark);
+            max-width: 640px;
+            margin: 0 auto;
             padding: 88px 72px;
             color: white;
         }
@@ -930,77 +930,6 @@
             line-height: 1.65;
             padding-top: 10px;
         }
-
-        .contact-right {
-            background: white;
-            padding: 88px 72px;
-        }
-
-        .contact-right h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 30px;
-            color: var(--navy);
-            margin-bottom: 36px;
-            letter-spacing: -0.01em;
-        }
-
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-        .form-group { margin-bottom: 20px; }
-
-        .form-group label {
-            display: block;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 13px 16px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-family: 'Rubik', sans-serif;
-            font-size: 15px;
-            color: var(--text-dark);
-            background: white;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .form-group textarea { min-height: 110px; resize: vertical; }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(10,130,180,0.15);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 16px;
-            background: var(--red);
-            color: white;
-            border: none;
-            border-radius: 3px;
-            font-family: 'Rubik', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.15s ease;
-        }
-
-        .btn-submit:hover { background: var(--red-dark); transform: translateY(-2px); }
-        .btn-submit:active { transform: translateY(0); }
-        .btn-submit:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 
         /* ── FOOTER ───────────────────────────────────────── */
         footer {
@@ -1157,8 +1086,6 @@
 
             .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
 
-            .contact { grid-template-columns: 1fr; }
-
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
         }
 
@@ -1259,7 +1186,7 @@
             .pipeline { padding: 72px 24px; }
             .pipeline-grid { grid-template-columns: 1fr; }
 
-            .contact-left, .contact-right { padding: 56px 24px; }
+            .contact-left { padding: 56px 24px; }
 
             footer { padding: 60px 24px 36px; }
             .footer-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -1475,7 +1402,8 @@
             </div>
 
             <div class="product-card fade-up" style="transition-delay:0.35s" tabindex="0">
-                <div class="pc-img" style="background-image:url('brand_assets/WhatsApp Image 2026-06-15 at 7.17.22 PM.jpeg');background-position:-295px -326px">
+                <div class="pc-img-real">
+                    <img src="brand_assets/utcef-o-card.jpg" alt="UTCEF-O">
                     <span class="pc-cat" style="background:#156B35">Anti-infective</span>
                 </div>
                 <div class="pc-body">
@@ -1713,44 +1641,6 @@
             <div class="cd-text">India &mdash; serving patients nationwide</div>
         </div>
     </div>
-    <div class="contact-right">
-        <h3>Send us a Message</h3>
-        <form>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" placeholder="First name">
-                </div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input type="text" placeholder="Last name">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" placeholder="your@email.com">
-            </div>
-            <div class="form-group">
-                <label>Organisation / Company</label>
-                <input type="text" placeholder="Organisation name">
-            </div>
-            <div class="form-group">
-                <label>Enquiry Type</label>
-                <select>
-                    <option value="">Select enquiry type&hellip;</option>
-                    <option>Product Enquiry</option>
-                    <option>Distribution Partnership</option>
-                    <option>Medical Professional</option>
-                    <option>General Enquiry</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Message</label>
-                <textarea placeholder="Tell us how we can help&hellip;"></textarea>
-            </div>
-            <button type="submit" class="btn-submit">Send Message</button>
-        </form>
-    </div>
 </section>
 
 <!-- ── FOOTER ─────────────────────────────────────────────── -->
@@ -1794,7 +1684,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2025 Zylomed Healthcare. All rights reserved.</p>
+        <p>&copy; 2026 Zylomed Healthcare. All rights reserved.</p>
         <div class="footer-badges">
             <span class="footer-badge">WHO GMP</span>
             <span class="footer-badge">GLP</span>
